@@ -206,11 +206,32 @@ author_stats_main_vars['quarter'] = pd.PeriodIndex(author_stats_main_vars.last_w
 stories_author_quarter = author_stats_main_vars.pivot_table("Number of Stories", ["quarter"], "rename",aggfunc="count").fillna(0)
 pageviews_author_quarter = author_stats_main_vars.pivot_table("avg_pageviews", ["quarter"], "rename",aggfunc="sum").fillna(0)
 
+stories_author_quarter = stories_author_quarter.T
+pageviews_author_quarter = pageviews_author_quarter.T
+
+stories_pageviews = pd.DataFrame(columns = ['S1','P1','S2','P2','S3','P3','S4','P4'])
+stories_pageviews['S1'] = stories_author_quarter.iloc[:,-4]
+stories_pageviews['P1'] = pageviews_author_quarter.iloc[:,-4]
+stories_pageviews['S2'] = stories_author_quarter.iloc[:,-3]
+stories_pageviews['P2'] = pageviews_author_quarter.iloc[:,-3]
+stories_pageviews['S3'] = stories_author_quarter.iloc[:,-2]
+stories_pageviews['P3'] = pageviews_author_quarter.iloc[:,-2]
+stories_pageviews['S4'] = stories_author_quarter.iloc[:,-1]
+stories_pageviews['P4'] = pageviews_author_quarter.iloc[:,-1]
+
+#La tabla stories_pageviews es el output principal de esta tab, aunque las otras tablas quizas se usan en alguna otra tab para calcular otra cosa. PEro la unica que se presenta en el ppt es stories_pageviews. No obstante, hay que filtrarla para no incluir todos los autores que ya no estan activos
+
+#AHORA PASO A LA TAB AUTHOR_STATS
+
+
+
 ###############################    
-###############################     Para terminar con la tab "Author Stats Main Vars" tengo que armar la tabla que tiene como columna
-###############################     los quarter-year de stories y pageviews y como filas los autores  
+###############################     
+###############################     
 
 #GRAFICOS
+
+stories_pageviews
 
 fig = plt.figure(figsize=(10,5))
 ax1 = fig.add_subplot(1,2,1)
